@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <title>{{title}}</title>
+</head>
+<body>
+<header>
+    <div class="container" style="background-color: white; border:#aaabb8 solid; ">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            {% if current_user.is_authenticated %}
+            <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
+            {% endif %}
+
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/" class="nav-link px-2 link-secondary">Лента</a></li>
+                <li><a href="#" class="nav-link px-2">Поддержка</a></li>
+                <li><a href="/profile" class="nav-link px-2">Профиль</a></li>
+                <li><a href="#" class="nav-link px-2" style="">Настройки</a></li>
+
+                {% if not current_user.is_authenticated %}
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                    <li><a class="btn btn-outline-primary me-2" href="/login">Войти</a></li>
+                    <li><a class="btn btn-primary" href="/register">Регистрация</a></li>
+
+                    {% endif %}
+        </header>
+    </div>
+</header>
+
+<main role="main" class="container">
+    <style>
+	body {
+		background: url(https://img.freepik.com/free-photo/white-concrete-wall_53876-92803.jpg?w=1380&t=st=1681221851~exp=1681222451~hmac=b56127937686b29879128f878f829b32c23de93e679daa4056adbcf6740c8b92);
+		background-color: #AAABB8
+		background-repeat: repeat-x;
+		background-repeat: repeat-y;
+		background-size: 100%;
+	}
+
+
+
+    </style>
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>
