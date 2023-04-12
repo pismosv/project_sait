@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Все записи в блоге</h1>
+{% for item in news%}
+<div class="col-md6 border rounded">
+    <div>
+        <h2>{{item.title}}</h2>
+
+        {{item.content}}
+
+
+        <style>div {
+    background: white; /* Цвет фона */
+    border:  solid gray; /* Белая рамка */
+    border-radius: 10px; /* Радиус скругления */
+   }
+
+        </style>
+        Автор - {{item.user.name}}, Дата написания - {{item.created_date}}
+
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
