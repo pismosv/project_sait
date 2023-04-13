@@ -8,7 +8,7 @@ from data.news import News
 from forms.user import RegisterForm, LoginForm
 from flask_login import LoginManager, login_user, logout_user, login_required, \
     current_user
-
+import json
 from forms.news import NewsForm
 
 app = Flask(__name__)
@@ -49,9 +49,19 @@ def profile():
         news = db_sess.query(News).filter(
             News.user == current_user)
     else:
-        redirect("/")
-        return
+        error_ = 101
+        return redirect(f"/error/{error_}")
     return render_template("profile.html", news=news)
+
+
+@app.route("/error/<error_code>", methods=['GET', 'POST'])
+def error(error_code):
+    with open('data/errors_codes.json', 'r',
+              encoding='utf-8') as f:
+        codes = json.load(f)
+
+    return render_template("error_window.html", error_name="Упс!",
+                           error_text=codes[error_code])
 
 
 @app.route('/register', methods=['GET', 'POST'])
