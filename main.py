@@ -1,4 +1,5 @@
 import os
+import sqlite3
 
 from flask import Flask, render_template, abort, request, flash, url_for
 from flask_restful import Api
@@ -60,12 +61,6 @@ def profile():
     return render_template("profile.html", news=news)
 
 
-def allowed_file(filename):
-    """ Функция проверки расширения файла """
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
 # @app.route('/sample_file_upload', methods=['POST', 'GET'])
 # def sample_file_upload():
 #     if request.method == 'GET':
@@ -107,6 +102,53 @@ def error(error_code):
 
     return render_template("error_window.html", error_name="Упс!",
                            error_text=codes[error_code])
+
+
+@app.route("/like/<news_id>", methods=['GET', 'POST'])
+def like(news_id):
+    db_sess = db_session.create_session()
+    new = db_sess.query(News).filter(News.id == news_id).first()
+    if current_user.name not in str(new.liked_users):
+        conn = sqlite3.connect("db/blogs.db")
+        cur = conn.cursor()
+        res = cur.execute(f"""UPDATE news
+                            SET likes = {new.likes + 1}
+                            WHERE id = {news_id}""")
+        if new.liked_users:
+            res1 = cur.execute(f"""UPDATE news
+                                  SET liked_users = '{str(new.liked_users)
+                                                       + f";{current_user.name}"}'
+                                  WHERE id = {news_id}""")
+        else:
+            res1 = cur.execute(f"""UPDATE news
+                                  SET liked_users = '{current_user.name}'
+                                  WHERE id = {news_id}""")
+        conn.commit()
+    return redirect(f"/#news{new.id}")
+
+
+@app.route("/dislike/<news_id>", methods=['GET', 'POST'])
+def dislike(news_id):
+    db_sess = db_session.create_session()
+    new = db_sess.query(News).filter(News.id == news_id).first()
+    if current_user.name in str(new.liked_users):
+        conn = sqlite3.connect("db/blogs.db")
+        cur = conn.cursor()
+        res = cur.execute(f"""UPDATE news
+                            SET likes = {new.likes - 1}
+                            WHERE id = {news_id}""")
+        if ";" not in new.liked_users:
+            res1 = cur.execute(f"""UPDATE news
+                                  SET liked_users = '{str(new.liked_users).
+                               replace(f"{current_user.name}", "")}'
+                                  WHERE id = {news_id}""")
+        else:
+            res1 = cur.execute(f"""UPDATE news
+                                   SET liked_users = '{str(new.liked_users).
+                               replace(f";{current_user.name}", "")}'
+                                              WHERE id = {news_id}""")
+        conn.commit()
+    return redirect(f"/#news{new.id}")
 
 
 @app.route('/register', methods=['GET', 'POST'])

@@ -4,7 +4,7 @@
 <h1>Все записи в блоге</h1>
 {% for item in news%}
 <div class="col-md6 border rounded">
-    <div>
+    <div id="news{{loop.index}}">
         <img src="{{item.user.avatar(40)}}">
         <span>{{item.user.name}}<span/><br>
         <span>{{item.created_date}}<span/>
@@ -19,8 +19,23 @@
     border-radius: 5px; /* Радиус скругления */
    }
 
-        </style>
-    </span>
+        </style><br>
+        <span>{{item.likes}}<span/>
+        {% if current_user.is_authenticated %}
+            {% if not item.liked_users %}
+                <a href="/like/{{item.id}}" class="btn btn-danger">
+                ❤ Лайк
+                </a>
+            {% elif current_user.name not in item.liked_users%}
+                <a href="/like/{{item.id}}" class="btn btn-danger">
+                ❤ Лайк
+                </a>
+            {% elif current_user.name in item.liked_users %}
+                <a href="/dislike/{{item.id}}" class="btn btn-secondary">
+                ❤ Лайк
+                </a>
+            {% endif %}
+        {% endif %}
 </div>
 {% endfor %}
 {% endblock %}

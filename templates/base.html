@@ -14,6 +14,7 @@
     <div class="container" style="background-color: white; border:#aaabb8 solid; ">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             {% if current_user.is_authenticated %}
+            <img src="{{current_user.avatar(80)}}">
             <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
             {% endif %}
 

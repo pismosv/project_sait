@@ -18,4 +18,6 @@ class News(SqlAlchemyBase):
 
     user_id = sqlalchemy.Column(sqlalchemy.Integer,
                                 sqlalchemy.ForeignKey("users.id"))
+    likes = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    liked_users = sqlalchemy.Column(sqlalchemy.String)
     user = orm.relationship('User')
