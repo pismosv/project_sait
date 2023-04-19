@@ -11,23 +11,23 @@
 </head>
 <body>
 <header>
-    <div class="container" style="background-color: white; border:#aaabb8 solid; ">
+    <div class="container" style="background-color: #4682B4; border:#aaabb8 solid; ">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             {% if current_user.is_authenticated %}
-            <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
+            <a class="navbar-brand" style="color: white" href="/logout">{{ current_user.name }}</a>
             {% endif %}
 
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2 link-secondary">Лента</a></li>
-                <li><a href="#" class="nav-link px-2">Поддержка</a></li>
-                <li><a href="/profile" class="nav-link px-2">Профиль</a></li>
-                <li><a href="#" class="nav-link px-2" style="">Настройки</a></li>
+                <li><a href="/" class="nav-link px-2 link-secondary" style="color: white">Лента</a></li>
+                <li><a href="#" class="nav-link px-2" style="color: white">Поддержка</a></li>
+                <li><a href="/profile" class="nav-link px-2" style="color: white">Профиль</a></li>
+                <li><a href="#" class="nav-link px-2" style="color: white">Настройки</a></li>
 
                 {% if not current_user.is_authenticated %}
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                    <li><a class="btn btn-outline-primary me-2" href="/login">Войти</a></li>
-                    <li><a class="btn btn-primary" href="/register">Регистрация</a></li>
+                    <li><a class="btn btn-outline-primary me-2" style="color: white" href="/login">Войти</a></li>
+                    <li><a class="btn btn-primary" style="color: white" href="/register">Регистрация</a></li>
 
                     {% endif %}
         </header>
