@@ -1,4 +1,3 @@
-import os
 import sqlite3
 
 from flask import Flask, render_template, abort, request, flash, url_for
@@ -124,7 +123,8 @@ def like(news_id):
                                   SET liked_users = '{current_user.name}'
                                   WHERE id = {news_id}""")
         conn.commit()
-    return redirect(f"/#news{new.id}")
+    print(new.id)
+    return redirect(f"/#{new.id}")
 
 
 @app.route("/dislike/<news_id>", methods=['GET', 'POST'])
@@ -148,7 +148,8 @@ def dislike(news_id):
                                replace(f";{current_user.name}", "")}'
                                               WHERE id = {news_id}""")
         conn.commit()
-    return redirect(f"/#news{new.id}")
+    print(new.id)
+    return redirect(f"/#{new.id}")
 
 
 @app.route('/register', methods=['GET', 'POST'])
