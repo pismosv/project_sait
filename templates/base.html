@@ -11,7 +11,7 @@
 </head>
 <body>
 <header>
-    <div class="container" style="background-color: white; border:#aaabb8 solid; ">
+    <div class="container" style="background-color: #F0F8FF; border:#1891FF solid; ">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             {% if current_user.is_authenticated %}
             <img src="{{current_user.avatar(80)}}">
@@ -21,9 +21,8 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 link-secondary">Лента</a></li>
-                <li><a href="#" class="nav-link px-2">Поддержка</a></li>
                 <li><a href="/profile" class="nav-link px-2">Профиль</a></li>
-                <li><a href="#" class="nav-link px-2" style="">Настройки</a></li>
+               
 
                 {% if not current_user.is_authenticated %}
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
