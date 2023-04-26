@@ -20,6 +20,7 @@ class User(SqlAlchemyBase, UserMixin):
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                      default=datetime.datetime.now)
+    avatar = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
     news = orm.relationship("News", back_populates='user')
 
@@ -32,7 +33,7 @@ class User(SqlAlchemyBase, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.hashed_password, password)
 
-    def avatar(self, size):
-        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
-            digest, size)
+    # def avatar(self, size):
+    #     digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+    #     return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
+    #         digest, size)

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>div {
+    background: white; /* Цвет фона */
+    border:  solid gray; /* Белая рамка */
+    border-radius: 5px; /* Радиус скругления */
+   }
+
+</style>
+<div class="col-md6 border rounded">
+    <h1>Настройки пользователя</h1>
+    <span>Имя пользователя: {{ current_user.name }}</span><br>
+    <span>Почта пользователя: {{ current_user.email }}</span><br>
+    <span>О пользователе: {{ current_user.about }}</span><br>
+    <a href="/upload">Загрузить новый аватар</a>
+    {% if not current_user.avatar %}
+    <img src="static/empty_avatar.jpg", alt="если вы это читаете то знайте - все сломалось. удачи!" height="100" width="100">
+    {% else %}
+    <img src="static/users_files/{{current_user.avatar}}", alt="если вы это читаете то знайте - все сломалось. удачи!" height="100" width="100">
+    {% endif %}
+</div>
+{% endblock %}

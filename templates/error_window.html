@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{error_name}}</h1>
-<div>{{error_text}}</div>
-<img src="https://s00.yaplakal.com/pics/pics_preview/6/0/9/7610906.jpg", alt="broken"б width=200, height=200>
+<style>div {
+    background: white; /* Цвет фона */
+    border:  solid gray; /* Белая рамка */
+    border-radius: 5px; /* Радиус скругления */
+   }
+
+</style>
+<div>
+    <h1>{{error_name}}</h1>
+    <span>{{error_text}}</span>
+    <img src="https://s00.yaplakal.com/pics/pics_preview/6/0/9/7610906.jpg", alt="broken"б width=200, height=200>
+</div>
 {% endblock %}
