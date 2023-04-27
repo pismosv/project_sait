@@ -8,7 +8,7 @@
         {% if item.user.avatar == None %}
             <img src="static/empty_avatar.jpg" height="40" width="40">
         {% else %}
-            <img src="static/users_files/{{current_user.avatar}}" alt="avatar" height="40" width="40">
+            <img src="static/users_files/{{item.user.avatar}}" alt="avatar" height="40" width="40">
         {% endif %}
         <span>{{item.user.name}}<span/><br>
         <span>{{item.created_date}}<span/>
